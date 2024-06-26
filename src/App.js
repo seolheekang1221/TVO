@@ -4,6 +4,15 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
+const customIcon = new L.Icon({
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  shadowSize: [41, 41]
+})
+
 const cities = [
   { name: 'Seoul', lat: 37.5665, lon: 126.9780 },
   { name: 'New York', lat: 40.7128, lon: -74.0060 },
@@ -78,6 +87,7 @@ const App = () => {
           <Marker
             key={city.name}
             position={[city.lat, city.lon]}
+            icon={customIcon}
             eventHandlers={{
               click: () => {
                 getWeather(city.lat, city.lon)
