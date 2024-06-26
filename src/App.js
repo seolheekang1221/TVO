@@ -21,6 +21,9 @@ const cities = [
 const App = () => {
   const [weather, setWeather] = useState(null)
   const [error, setError] = useState('')
+  const [city, setCity] = useState('')
+  const [searchedWeather, setSearchedWeather] = useState(null)
+  const [searchError, setSearchError] = useState('')
 
   const getWeather = async (lat, lon) => {
     try {
@@ -38,6 +41,31 @@ const App = () => {
       setWeather(null)
     }
   }
+
+  const handleSearch = async (city) => {
+    try {
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+        params: {
+          q: city,
+          units: 'metric',
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY
+        }
+      })
+      setSearchedWeather(response.data)
+      setSearchError('')
+    } catch (error) {
+      setSearchError('City not found')
+      setSearchedWeather(null)
+    }
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (city) {
+      handleSearch(city)
+    }
+  }
+
   return (
     <div className="App">
       <h1>Weather App</h1>
@@ -66,6 +94,23 @@ const App = () => {
           <h2>{weather.name}</h2>
           <p>{weather.main.temp} °C</p>
           <p>{weather.weather[0].description}</p>
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter city"
+        />
+        <button type="submit">Get Weather</button>
+      </form>
+      {searchError && <p>{searchError}</p>}
+      {searchedWeather && (
+        <div>
+          <h2>{searchedWeather.name}</h2>
+          <p>{searchedWeather.main.temp} °C</p>
+          <p>{searchedWeather.weather[0].description}</p>
         </div>
       )}
     </div>
