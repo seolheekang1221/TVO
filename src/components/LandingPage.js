@@ -45,7 +45,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
   return (
     <div className="landing-page">
       <div className="login-container">
-        <h1>{showRegister ? 'Welcome' : 'Weather App'}</h1>
+        <h1>{showRegister ? 'Welcome the SkyCheck!' : 'SkyCheck'}</h1>
         <div className="form-group">
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           {showRegister && <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />}
