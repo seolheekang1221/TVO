@@ -34,6 +34,16 @@ const MainPage = ({ user }) => {
 
   const getWeather = async (lat, lon) => {
     try {
+      const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/reverse`, {
+        params: {
+          lat: lat,
+          lon: lon,
+          limit: 1,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+        },
+      })
+      const cityNameInEnglish = geocodeResponse.data[0].name
+  
       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
         params: {
           lat: lat,
@@ -48,11 +58,11 @@ const MainPage = ({ user }) => {
       const localTime = localDate.toLocaleTimeString()
       const localDateString = localDate.toLocaleDateString()
   
-      setWeather({ ...weatherData, main: { ...weatherData.main, temp: temperatureInCelsius }, localTime, localDateString })
+      setWeather({ ...weatherData, name: cityNameInEnglish, main: { ...weatherData.main, temp: temperatureInCelsius }, localTime, localDateString })
       setError('')
       setSearchedWeather(null)
       if (user) {
-        await saveSearch(weatherData.name, temperatureInCelsius, weatherData.weather[0].description, localDateString, localTime)
+        await saveSearch(cityNameInEnglish, temperatureInCelsius, weatherData.weather[0].description, localDateString, localTime)
       }
     } catch (error) {
       setError('Weather data not found')
@@ -63,9 +73,20 @@ const MainPage = ({ user }) => {
 
   const handleSearch = async (city) => {
     try {
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+      const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: city,
+          limit: 1,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+        },
+      })
+      const cityNameInEnglish = geocodeResponse.data[0].name
+      const { lat, lon } = geocodeResponse.data[0]
+  
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+        params: {
+          lat: lat,
+          lon: lon,
           units: 'metric',
           appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
         },
@@ -76,17 +97,17 @@ const MainPage = ({ user }) => {
       const localTime = localDate.toLocaleTimeString()
       const localDateString = localDate.toLocaleDateString()
   
-      setSearchedWeather({ ...weatherData, localTime, localDateString })
+      setSearchedWeather({ ...weatherData, name: cityNameInEnglish, localTime, localDateString })
       setSearchError('')
       setWeather(null)
       if (user) {
-        await saveSearch(weatherData.name, weatherData.main.temp, weatherData.weather[0].description, localDateString, localTime)
+        await saveSearch(cityNameInEnglish, weatherData.main.temp, weatherData.weather[0].description, localDateString, localTime)
       }
     } catch (error) {
       setSearchError('City not found')
       setSearchedWeather(null)
     }
-  }  
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -203,3 +224,4 @@ const MainPage = ({ user }) => {
 }
 
 export default MainPage
+
