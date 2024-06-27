@@ -28,7 +28,7 @@ const MainPage = ({ user }) => {
 
   useEffect(() => {
     if (user && user.searches) {
-      setSearches(user.searches.reverse())
+      setSearches([...user.searches].reverse())
     }
   }, [user])
 
