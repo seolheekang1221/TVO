@@ -54,7 +54,8 @@ const MainPage = ({ user }) => {
       const weatherData = response.data
       const temperatureInCelsius = (weatherData.main.temp - 273.15).toFixed(1)
       const timezoneOffset = weatherData.timezone
-      const localDate = new Date(Date.now() + timezoneOffset * 1000)
+      const utcTime = Date.now() + new Date().getTimezoneOffset() * 60000
+      const localDate = new Date(utcTime + timezoneOffset * 1000)
       const localTime = localDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       const localDateString = `${localDate.toLocaleDateString([], { month: 'long', day: 'numeric' })} (${localDate.toLocaleDateString([], { weekday: 'short' })})`
   
@@ -93,7 +94,8 @@ const MainPage = ({ user }) => {
       })
       const weatherData = response.data
       const timezoneOffset = weatherData.timezone
-      const localDate = new Date(Date.now() + timezoneOffset * 1000)
+      const utcTime = Date.now() + new Date().getTimezoneOffset() * 60000
+      const localDate = new Date(utcTime + timezoneOffset * 1000)
       const localTime = localDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       const localDateString = `${localDate.toLocaleDateString([], { month: 'long', day: 'numeric' })} (${localDate.toLocaleDateString([], { weekday: 'short' })})`
   
