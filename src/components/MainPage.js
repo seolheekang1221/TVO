@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import './MainPage.css'
 import cities from '../assets/cities.json'
+import ReactPaginate from 'react-paginate'
 
 const customIcon = new L.Icon({
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -22,6 +23,8 @@ const MainPage = ({ user }) => {
   const [searchedWeather, setSearchedWeather] = useState(null)
   const [searchError, setSearchError] = useState('')
   const [searches, setSearches] = useState(user ? user.searches : [])
+  const [currentPage, setCurrentPage] = useState(0)
+  const itemsPerPage = 5
 
   useEffect(() => {
     if (user && user.searches) {
@@ -109,6 +112,14 @@ const MainPage = ({ user }) => {
     }
   }
 
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected)
+  }
+
+  const offset = currentPage * itemsPerPage
+  const currentSearches = searches.slice(offset, offset + itemsPerPage)
+  const pageCount = Math.ceil(searches.length / itemsPerPage)
+
   return (
     <div className="main-page" style={{ display: 'flex', color: 'black' }}>
       <div className="sidebar">
@@ -137,13 +148,30 @@ const MainPage = ({ user }) => {
           </div>
         )}
         {user && searches.length > 0 && (
-          <div>
+          <div className="search-history">
             <h2>Search History</h2>
-            {searches.map((search, index) => (
-              <div key={index}>
-                <p>{search.city}: {search.temperature} °C, {search.description}, {search.localDateString}, {search.localTime}</p>
+            {currentSearches.map((search, index) => (
+              <div key={index} className="search-item">
+                <span>City: {search.city}</span>
+                <span>{search.temperature} °C</span>
+                <span>{search.description}</span>
+                <span>{search.localDateString}</span>
+                <span>{search.localTime}</span>
               </div>
             ))}
+            <ReactPaginate
+              previousLabel={'«'}
+              nextLabel={'»'}
+              breakLabel={'...'}
+              breakClassName={'break-me'}
+              pageCount={pageCount}
+              marginPagesDisplayed={0}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination'}
+              subContainerClassName={'pages pagination'}
+              activeClassName={'active'}
+            />
           </div>
         )}
       </div>

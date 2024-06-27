@@ -47,4 +47,51 @@
 p {
     color: black;
 }
+
+.pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 20px 30px;
+}
+  
+.pagination li {
+    margin: 0 5px;
+}
+  
+.pagination a {
+    padding: 4px 10px;
+    text-decoration: none;
+    color: #6c757d;
+    cursor: pointer;
+    border-radius: 6px;
+}
+  
+.pagination li.active a {
+    background-color: #6c757d;
+    color: white;
+}
+  
+.pagination li.disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.search-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+  
+/* .search-item span {
+    margin-right: 13px;
+} */
+
+.search-history {
+    padding: 30px;
+}
+
+.search-history p {
+    font-size: 14px;
+}
   
