@@ -77,15 +77,27 @@
     font-size: 20px;
 }
 
+.search-history {
+    padding: 30px;
+    margin: 10px;
+    background-color: rgb(61,87,111);
+}
+
 .search-history h2 {
     color: grey;
     font-weight: bold;
 }
 
-.search-history span {
-    color: white;
-    font-weight: bold;
+.search-history p {
+    font-size: 14px;
 }
+
+.search-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+  
 
 .pagination {
     display: flex;
@@ -115,22 +127,3 @@
     color: #ccc;
     cursor: not-allowed;
 }
-
-.search-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-}
-  
-/* .search-item span {
-    margin-right: 13px;
-} */
-
-.search-history {
-    padding: 30px;
-}
-
-.search-history p {
-    font-size: 14px;
-}
-  

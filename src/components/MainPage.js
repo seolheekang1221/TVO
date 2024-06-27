@@ -158,8 +158,8 @@ const MainPage = ({ user }) => {
             <h2>{weather.name} Weather</h2>
             <p className="temp">{weather.main.temp} °C</p>
             <p className="description">{weather.weather[0].description}</p>
-            <p>Local time: {weather.localTime}</p>
             <p>Local date: {weather.localDateString}</p>
+            <p>Local time: {weather.localTime}</p>
           </div>
         )}
         {searchError && <p>{searchError}</p>}
@@ -168,8 +168,8 @@ const MainPage = ({ user }) => {
             <h2>{searchedWeather.name} Weather</h2>
             <p className="temp">{searchedWeather.main.temp} °C</p>
             <p className="description">{searchedWeather.weather[0].description}</p>
-            <p>Local time: {searchedWeather.localTime}</p>
             <p>Local date: {searchedWeather.localDateString}</p>
+            <p>Local time: {searchedWeather.localTime}</p>
           </div>
         )}
         {user && searches.length > 0 && (
@@ -177,11 +177,10 @@ const MainPage = ({ user }) => {
             <h2>Search History</h2>
             {currentSearches.map((search, index) => (
               <div key={index} className="search-item">
-                <span>City: {search.city}</span>
-                <span>{search.temperature} °C</span>
-                <span>{search.description}</span>
-                <span>{search.localDateString}</span>
-                <span>{search.localTime}</span>
+                <div>
+                  <p>{index + 1}. {search.city} : {search.temperature} °C, {search.description}</p>
+                  <p>{search.localDateString}, {search.localTime}</p>
+                </div>
               </div>
             ))}
             <ReactPaginate
