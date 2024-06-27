@@ -53,7 +53,7 @@ const MainPage = ({ user }) => {
     } catch (error) {
       setError('Weather data not found')
       setWeather(null)
-          }
+    }
   }
   
 
@@ -112,6 +112,12 @@ const MainPage = ({ user }) => {
   return (
     <div className="main-page" style={{ display: 'flex', color: 'black' }}>
       <div className="sidebar">
+        <div className="mainpage-form-container">
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter city" />
+            <button type="submit">Get Weather</button>
+          </form>
+        </div>
         {error && <p>{error}</p>}
         {weather && (
           <div>
@@ -122,10 +128,6 @@ const MainPage = ({ user }) => {
             <p>Local date: {weather.localDateString}</p>
           </div>
         )}
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter city" />
-          <button type="submit">Get Weather</button>
-        </form>
         {searchError && <p>{searchError}</p>}
         {searchedWeather && (
           <div>
@@ -145,7 +147,7 @@ const MainPage = ({ user }) => {
           </div>
         )}
       </div>
-      <MapContainer className="map-container" center={[20, 0]} zoom={2}>
+      <MapContainer className="map-container" center={[20, 0]} zoom={3}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
