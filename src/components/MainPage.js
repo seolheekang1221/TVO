@@ -50,6 +50,7 @@ const MainPage = ({ user }) => {
   
       setWeather({ ...weatherData, main: { ...weatherData.main, temp: temperatureInCelsius }, localTime, localDateString })
       setError('')
+      setSearchedWeather(null)
       if (user) {
         await saveSearch(weatherData.name, temperatureInCelsius, weatherData.weather[0].description, localDateString, localTime)
       }
@@ -77,6 +78,7 @@ const MainPage = ({ user }) => {
   
       setSearchedWeather({ ...weatherData, localTime, localDateString })
       setSearchError('')
+      setWeather(null)
       if (user) {
         await saveSearch(weatherData.name, weatherData.main.temp, weatherData.weather[0].description, localDateString, localTime)
       }
