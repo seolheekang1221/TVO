@@ -84,7 +84,7 @@ const MainPage = ({ user }) => {
       setSearchError('City not found')
       setSearchedWeather(null)
     }
-  }
+  }  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -145,6 +145,8 @@ const MainPage = ({ user }) => {
             <h2>{searchedWeather.name}</h2>
             <p>{searchedWeather.main.temp} °C</p>
             <p>{searchedWeather.weather[0].description}</p>
+            <p>Local time: {searchedWeather.localTime}</p>
+            <p>Local date: {searchedWeather.localDateString}</p>
           </div>
         )}
         {user && searches.length > 0 && (
