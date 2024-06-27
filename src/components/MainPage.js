@@ -178,7 +178,7 @@ const MainPage = ({ user }) => {
             {currentSearches.map((search, index) => (
               <div key={index} className="search-item">
                 <div>
-                  <p>{index + 1}. {search.city} : {search.temperature} °C, {search.description}</p>
+                  <p>{offset + index + 1}. {search.city} : {search.temperature} °C, {search.description}</p>
                   <p>{search.localDateString}, {search.localTime}</p>
                 </div>
               </div>
