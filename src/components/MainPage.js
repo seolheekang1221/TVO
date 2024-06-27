@@ -50,16 +50,20 @@ const MainPage = ({ user }) => {
           appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
         },
       })
-      setWeather(response.data)
+      const weatherData = response.data
+      // Convert temperature from Kelvin to Celsius and round to 2 decimal places
+      const temperatureInCelsius = (weatherData.main.temp - 273.15).toFixed(1)
+      setWeather({ ...weatherData, main: { ...weatherData.main, temp: temperatureInCelsius } })
       setError('')
       if (user) {
-        await saveSearch(response.data.name, response.data.main.temp, response.data.weather[0].description)
+        await saveSearch(weatherData.name, temperatureInCelsius, weatherData.weather[0].description)
       }
     } catch (error) {
       setError('Weather data not found')
       setWeather(null)
     }
   }
+  
 
   const handleSearch = async (city) => {
     try {
