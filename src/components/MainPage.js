@@ -28,7 +28,7 @@ const MainPage = ({ user }) => {
 
   useEffect(() => {
     if (user && user.searches) {
-      setSearches(user.searches)
+      setSearches(user.searches.reverse())
     }
   }, [user])
 
@@ -127,8 +127,8 @@ const MainPage = ({ user }) => {
         localTime,
       })
       setSearches((prevSearches) => [
-        ...prevSearches,
         { city, temperature, description, localDateString, localTime },
+        ...prevSearches,
       ])
     } catch (err) {
       console.error(err)
