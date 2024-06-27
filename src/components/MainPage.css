@@ -7,7 +7,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
     margin-right: 10px;
 }
   
@@ -38,6 +37,14 @@
     width: 30%;
     background-color: #2b4f6f;
 }
+
+.sidebar-header{
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
   
 .map-container {
     height: 100vh;
@@ -55,8 +62,9 @@
 }
 
 .weather-container {
-    padding: 30px;
-    margin: 10px 0;
+    padding: 20px;
+    background-color: #1f3a5f;
+    margin: 30px 10px;
 }
   
 .weather-container h2 {

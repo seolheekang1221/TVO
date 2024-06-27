@@ -148,6 +148,9 @@ const MainPage = ({ user }) => {
   return (
     <div className="main-page" style={{ display: 'flex', color: 'black' }}>
       <div className="sidebar">
+        <div className="sidebar-header"> 
+          {user && <h2>Hello, {user.username}!</h2>}
+        </div>
         <div className="mainpage-form-container">
           <form onSubmit={handleSubmit}>
             <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter city" />
