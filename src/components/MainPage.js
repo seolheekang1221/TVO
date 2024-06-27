@@ -55,8 +55,8 @@ const MainPage = ({ user }) => {
       const temperatureInCelsius = (weatherData.main.temp - 273.15).toFixed(1)
       const timezoneOffset = weatherData.timezone
       const localDate = new Date(Date.now() + timezoneOffset * 1000)
-      const localTime = localDate.toLocaleTimeString()
-      const localDateString = localDate.toLocaleDateString()
+      const localTime = localDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      const localDateString = `${localDate.toLocaleDateString([], { month: 'long', day: 'numeric' })} (${localDate.toLocaleDateString([], { weekday: 'short' })})`
   
       setWeather({ ...weatherData, name: cityNameInEnglish, main: { ...weatherData.main, temp: temperatureInCelsius }, localTime, localDateString })
       setError('')
@@ -94,8 +94,8 @@ const MainPage = ({ user }) => {
       const weatherData = response.data
       const timezoneOffset = weatherData.timezone
       const localDate = new Date(Date.now() + timezoneOffset * 1000)
-      const localTime = localDate.toLocaleTimeString()
-      const localDateString = localDate.toLocaleDateString()
+      const localTime = localDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      const localDateString = `${localDate.toLocaleDateString([], { month: 'long', day: 'numeric' })} (${localDate.toLocaleDateString([], { weekday: 'short' })})`
   
       setSearchedWeather({ ...weatherData, name: cityNameInEnglish, localTime, localDateString })
       setSearchError('')
@@ -154,20 +154,20 @@ const MainPage = ({ user }) => {
         </div>
         {error && <p>{error}</p>}
         {weather && (
-          <div>
-            <h2>{weather.name}</h2>
-            <p>{weather.main.temp} °C</p>
-            <p>{weather.weather[0].description}</p>
+          <div className="weather-container">
+            <h2>{weather.name} Weather</h2>
+            <p className="temp">{weather.main.temp} °C</p>
+            <p className="description">{weather.weather[0].description}</p>
             <p>Local time: {weather.localTime}</p>
             <p>Local date: {weather.localDateString}</p>
           </div>
         )}
         {searchError && <p>{searchError}</p>}
         {searchedWeather && (
-          <div>
-            <h2>{searchedWeather.name}</h2>
-            <p>{searchedWeather.main.temp} °C</p>
-            <p>{searchedWeather.weather[0].description}</p>
+          <div className="weather-container">
+            <h2>{searchedWeather.name} Weather</h2>
+            <p className="temp">{searchedWeather.main.temp} °C</p>
+            <p className="description">{searchedWeather.weather[0].description}</p>
             <p>Local time: {searchedWeather.localTime}</p>
             <p>Local date: {searchedWeather.localDateString}</p>
           </div>
