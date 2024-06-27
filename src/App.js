@@ -13,7 +13,7 @@ const App = () => {
         <Route path="/" element={<LandingPage setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} />
         <Route
           path="/main"
-          element={<MainPage user={user} />}
+          element={isLoggedIn ? <MainPage user={user} /> : <Navigate to="/" />}
         />
       </Routes>
     </Router>
