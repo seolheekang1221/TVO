@@ -51,12 +51,16 @@ const MainPage = ({ user }) => {
         },
       })
       const weatherData = response.data
-      // Convert temperature from Kelvin to Celsius and round to 2 decimal places
       const temperatureInCelsius = (weatherData.main.temp - 273.15).toFixed(1)
-      setWeather({ ...weatherData, main: { ...weatherData.main, temp: temperatureInCelsius } })
+      const timezoneOffset = weatherData.timezone
+      const localDate = new Date(Date.now() + timezoneOffset * 1000)
+      const localTime = localDate.toLocaleTimeString()
+      const localDateString = localDate.toLocaleDateString()
+  
+      setWeather({ ...weatherData, main: { ...weatherData.main, temp: temperatureInCelsius }, localTime, localDateString })
       setError('')
       if (user) {
-        await saveSearch(weatherData.name, temperatureInCelsius, weatherData.weather[0].description)
+        await saveSearch(weatherData.name, temperatureInCelsius, weatherData.weather[0].description, localDateString, localTime)
       }
     } catch (error) {
       setError('Weather data not found')
@@ -74,10 +78,16 @@ const MainPage = ({ user }) => {
           appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
         },
       })
-      setSearchedWeather(response.data)
+      const weatherData = response.data
+      const timezoneOffset = weatherData.timezone
+      const localDate = new Date(Date.now() + timezoneOffset * 1000)
+      const localTime = localDate.toLocaleTimeString()
+      const localDateString = localDate.toLocaleDateString()
+  
+      setSearchedWeather({ ...weatherData, localTime, localDateString })
       setSearchError('')
       if (user) {
-        await saveSearch(response.data.name, response.data.main.temp, response.data.weather[0].description)
+        await saveSearch(weatherData.name, weatherData.main.temp, weatherData.weather[0].description, localDateString, localTime)
       }
     } catch (error) {
       setSearchError('City not found')
@@ -92,17 +102,19 @@ const MainPage = ({ user }) => {
     }
   }
 
-  const saveSearch = async (city, temperature, description) => {
+  const saveSearch = async (city, temperature, description, localDateString, localTime) => {
     try {
       await axios.post('/api/users/search', {
         userId: user._id,
         city,
         temperature,
         description,
+        localDateString,
+        localTime,
       })
       setSearches((prevSearches) => [
         ...prevSearches,
-        { city, temperature, description },
+        { city, temperature, description, localDateString, localTime },
       ])
     } catch (err) {
       console.error(err)
@@ -138,6 +150,8 @@ const MainPage = ({ user }) => {
           <h2>{weather.name}</h2>
           <p>{weather.main.temp} °C</p>
           <p>{weather.weather[0].description}</p>
+          <p>Local time: {weather.localTime}</p>
+          <p>Local date: {weather.localDateString}</p>
         </div>
       )}
       <form onSubmit={handleSubmit}>
@@ -157,7 +171,7 @@ const MainPage = ({ user }) => {
           <h2>Search History</h2>
           {searches.map((search, index) => (
             <div key={index}>
-              <p>{search.city}: {search.temperature} °C, {search.description}</p>
+              <p>{search.city}: {search.temperature} °C, {search.description}, {search.localDateString}, {search.localTime}</p>
             </div>
           ))}
         </div>
