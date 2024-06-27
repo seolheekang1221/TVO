@@ -30,12 +30,11 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/search', async (req, res) => {
-  const { userId, city, temperature, description } = req.body
-
+  const { userId, city, temperature, description, localDateString, localTime } = req.body
   try {
     const user = await User.findById(userId)
     if (user) {
-      user.searches.push({ city, temperature, description })
+      user.searches.push({ city, temperature, description, localDateString, localTime})
       await user.save()
       res.status(200).json({ message: 'Search saved', searches: user.searches })
     } else {
