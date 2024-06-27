@@ -25,7 +25,27 @@ const cities = [
   { name: 'Beijing', lat: 39.9042, lon: 116.4074 },
   { name: 'Cairo', lat: 30.0444, lon: 31.2357 },
   { name: 'Rio de Janeiro', lat: -22.9068, lon: -43.1729 },
+  { name: 'Los Angeles', lat: 34.0522, lon: -118.2437 },
+  { name: 'Toronto', lat: 43.651070, lon: -79.347015 },
+  { name: 'Chicago', lat: 41.8781, lon: -87.6298 },
+  { name: 'Dubai', lat: 25.276987, lon: 55.296249 },
+  { name: 'Mumbai', lat: 19.0760, lon: 72.8777 },
+  { name: 'Hong Kong', lat: 22.3193, lon: 114.1694 },
+  { name: 'Bangkok', lat: 13.7563, lon: 100.5018 },
+  { name: 'Singapore', lat: 1.3521, lon: 103.8198 },
+  { name: 'Mexico City', lat: 19.4326, lon: -99.1332 },
+  { name: 'Buenos Aires', lat: -34.6037, lon: -58.3816 },
+  { name: 'Sao Paulo', lat: -23.5505, lon: -46.6333 },
+  { name: 'Jakarta', lat: -6.2088, lon: 106.8456 },
+  { name: 'Lagos', lat: 6.5244, lon: 3.3792 },
+  { name: 'Istanbul', lat: 41.0082, lon: 28.9784 },
+  { name: 'Manila', lat: 14.5995, lon: 120.9842 },
+  { name: 'Lima', lat: -12.0464, lon: -77.0428 },
+  { name: 'Tehran', lat: 35.6892, lon: 51.3890 },
+  { name: 'Bangladesh', lat: 23.6850, lon: 90.3563 },
+  { name: 'Baghdad', lat: 33.3152, lon: 44.3661 },
 ]
+
 
 const MainPage = ({ user }) => {
   const [weather, setWeather] = useState(null)
