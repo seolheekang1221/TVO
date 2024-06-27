@@ -22,6 +22,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
   const register = async () => {
     try {
       const response = await axios.post('/api/users/register', { username, password, email })
+      console.log(response)
       setUsername('')
       setPassword('')
       setEmail('')
