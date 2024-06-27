@@ -8,6 +8,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [showRegister, setShowRegister] = useState(false)
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const toggleForm = () => {
@@ -15,6 +16,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
     setUsername('')
     setEmail('')
     setPassword('')
+    setError('')
   }
 
   const register = async () => {
@@ -23,9 +25,10 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
       setUsername('')
       setPassword('')
       setEmail('')
+      setError('')
       navigate('/main')
     } catch (err) {
-      alert(err.response.data.error)
+      setError('Registration failed. Please try again.')
     }
   }
 
@@ -36,21 +39,23 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
       setIsLoggedIn(true)
       setUsername('')
       setPassword('')
+      setError('')
       navigate('/main')
     } catch (err) {
-      alert(err.response.data.error)
+      setError('Login failed. Please try again.')
     }
   }
 
   return (
     <div className="landing-page">
       <div className="login-container">
-        <h1>{showRegister ? 'Welcome the SkyCheck!' : 'SkyCheck'}</h1>
+        <h1>{showRegister ? 'Welcome to SkyCheck!' : 'SkyCheck'}</h1>
         <div className="form-group">
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           {showRegister && <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />}
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button onClick={showRegister ? register : login}>{showRegister ? 'Register' : 'Login'}</button>
+          {error && <p className="error-message">{error}</p>}
           <p className="auth-toggle">
             {showRegister ? 'Already have an account?' : "Don't have an account?"} <button onClick={toggleForm}>{showRegister ? 'Login' : 'Sign Up'}</button>
           </p>
