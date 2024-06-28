@@ -35,7 +35,7 @@ const MainPage = ({ user }) => {
   const getWeather = async (lat, lon) => {
     try {
       console.log('Fetching weather data for coordinates:', lat, lon);
-      const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/reverse`, {
+      const geocodeResponse = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse`, {
         params: {
           lat: lat,
           lon: lon,
@@ -45,7 +45,7 @@ const MainPage = ({ user }) => {
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
       console.log('Geocode response:', geocodeResponse.data);
-      const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather`, {
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
         params: {
           lat: lat,
           lon: lon,
@@ -77,7 +77,7 @@ const MainPage = ({ user }) => {
   const handleSearch = async (city) => {
     try {
       console.log('Searching for city:', city);
-      const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {
+      const geocodeResponse = await axios.get(`https://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: city,
           limit: 1,
@@ -87,7 +87,7 @@ const MainPage = ({ user }) => {
       const cityNameInEnglish = geocodeResponse.data[0].name
       const { lat, lon } = geocodeResponse.data[0]
   
-      const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather`, {
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
         params: {
           lat: lat,
           lon: lon,
@@ -123,7 +123,7 @@ const MainPage = ({ user }) => {
 
   const saveSearch = async (city, temperature, description, localDateString, localTime) => {
     try {
-      await axios.post('http://tvo-2.onrender.com/api/users/search', {
+      await axios.post('https://tvo-2.onrender.com/api/users/search', {
         userId: user._id,
         city,
         temperature,
