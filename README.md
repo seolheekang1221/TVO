@@ -7,6 +7,7 @@
 ## Client (Frontend)
 Navigate to the client directory and initialize the project:
 
+```bash
 cd client
 npm init
 npm start
