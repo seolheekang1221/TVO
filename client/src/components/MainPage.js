@@ -28,7 +28,7 @@ const MainPage = ({ user }) => {
 
   useEffect(() => {
     if (user && user.searches) {
-      setSearches([...user.searches].reverse())
+      setSearches([...user.searches])
     }
   }, [user])
 
@@ -132,6 +132,7 @@ const MainPage = ({ user }) => {
         { city, temperature, description, localDateString, localTime },
         ...prevSearches,
       ])
+      localStorage.setItem('user', JSON.stringify({ ...user, searches: [{ city, temperature, description, localDateString, localTime }, ...searches] }))
     } catch (err) {
       console.error(err)
     }

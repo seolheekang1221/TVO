@@ -22,12 +22,14 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
   const register = async () => {
     try {
       const response = await axios.post('/api/users/register', { username, password, email })
-      console.log(response)
+      localStorage.removeItem('user');
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('searches');
       setUsername('')
       setPassword('')
       setEmail('')
       setError('')
-      navigate('/main')
+      setShowRegister(false); 
       console.log(response)
     } catch (err) {
       setError('Registration failed. Please try again.')
