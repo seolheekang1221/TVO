@@ -27,6 +27,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
       setEmail('')
       setError('')
       navigate('/main')
+      console.log(response)
     } catch (err) {
       setError('Registration failed. Please try again.')
     }
