@@ -34,14 +34,12 @@ const MainPage = ({ user }) => {
 
   const getWeather = async (lat, lon) => {
     try {
-      const apiKey = '2ba454e0754b78f4b2b116ebe21ce7ef'
-      
       const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/reverse`, {
         params: {
           lat: lat,
           lon: lon,
           limit: 1,
-          appid: apiKey,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY
         },
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
@@ -50,7 +48,7 @@ const MainPage = ({ user }) => {
         params: {
           lat: lat,
           lon: lon,
-          appid: apiKey,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY
         },
       })
       const weatherData = response.data
@@ -76,13 +74,11 @@ const MainPage = ({ user }) => {
 
   const handleSearch = async (city) => {
     try {
-      const apiKey = '2ba454e0754b78f4b2b116ebe21ce7ef'
-
       const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: city,
           limit: 1,
-          appid: apiKey,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY
         },
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
@@ -93,7 +89,7 @@ const MainPage = ({ user }) => {
           lat: lat,
           lon: lon,
           units: 'metric',
-          appid: apiKey,
+          appid: process.env.REACT_APP_OPENWEATHER_API_KEY
         },
       })
       const weatherData = response.data
@@ -124,7 +120,7 @@ const MainPage = ({ user }) => {
 
   const saveSearch = async (city, temperature, description, localDateString, localTime) => {
     try {
-      await axios.post('/api/users/search', {
+      await axios.post('https://tvo-2.onrender.com/api/users/search', {
         userId: user._id,
         city,
         temperature,
