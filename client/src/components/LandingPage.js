@@ -21,7 +21,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
 
   const register = async () => {
     try {
-      const response = await axios.post('/api/users/register', { username, password, email })
+      const response = await axios.post('https://tvo-2.onrender.com/api/users/register', { username, password, email })
       localStorage.removeItem('user');
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('searches');
@@ -38,7 +38,7 @@ const LandingPage = ({ setUser, setIsLoggedIn }) => {
 
   const login = async () => {
     try {
-      const response = await axios.post('/api/users/login', { username, password })
+      const response = await axios.post('https://tvo-2.onrender.com/api/users/login', { username, password })
       setUser(response.data.user)
       setIsLoggedIn(true)
       setUsername('')

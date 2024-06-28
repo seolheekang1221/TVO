@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5001",
+  "proxy": "https://tvo-2.onrender.com",
   "eslintConfig": {
     "extends": [
       "react-app",
