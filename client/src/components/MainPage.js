@@ -34,12 +34,14 @@ const MainPage = ({ user }) => {
 
   const getWeather = async (lat, lon) => {
     try {
+      const apiKey = '2ba454e0754b78f4b2b116ebe21ce7ef'
+      
       const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/reverse`, {
         params: {
           lat: lat,
           lon: lon,
           limit: 1,
-          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+          appid: apiKey,
         },
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
@@ -48,7 +50,7 @@ const MainPage = ({ user }) => {
         params: {
           lat: lat,
           lon: lon,
-          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+          appid: apiKey,
         },
       })
       const weatherData = response.data
@@ -74,11 +76,13 @@ const MainPage = ({ user }) => {
 
   const handleSearch = async (city) => {
     try {
+      const apiKey = '2ba454e0754b78f4b2b116ebe21ce7ef'
+
       const geocodeResponse = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: city,
           limit: 1,
-          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+          appid: apiKey,
         },
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
@@ -89,7 +93,7 @@ const MainPage = ({ user }) => {
           lat: lat,
           lon: lon,
           units: 'metric',
-          appid: process.env.REACT_APP_OPENWEATHER_API_KEY,
+          appid: apiKey,
         },
       })
       const weatherData = response.data
