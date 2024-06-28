@@ -11,6 +11,7 @@ Navigate to the client directory and initialize the project:
 cd client
 npm init
 npm start
+```bash
 
 ## Server (Backend)
 Navigate to the server directory, initialize the project, and start the server:
