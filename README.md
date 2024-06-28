@@ -3,6 +3,9 @@
 - This project consists of two main components: the client (frontend) and the server (backend). 
 - The client is built using React and the server is built with Node.js, with MongoDB as the database to store user data and search history.
 
+# Demo
+https://www.youtube.com/watch?v=Rvrk-jIGUeA 
+
 # Project Structure
 ## Client (Frontend)
 Navigate to the client directory and initialize the project:
@@ -38,7 +41,3 @@ node index.js
 ## Deployment Plans
 The deployment is optional for this assignment, so I have initially submitted the completed project. 
 Once the deployment is finished, I will add the site link here and send it via email.
-
-
-# Demo
-https://www.youtube.com/watch?v=Rvrk-jIGUeA 
