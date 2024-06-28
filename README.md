@@ -34,3 +34,7 @@ node index.js
 - On refreshing the site, the user data and search history are retained, ensuring a seamless user experience.
 ## Database Integration
 - All user data and search history are stored in a MongoDB database, ensuring scalability and reliability.
+  
+## Deployment Plans
+The deployment is optional for this assignment, so I have initially submitted the completed project. 
+Once the deployment is finished, I will add the site link here and send it via email.
