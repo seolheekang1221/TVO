@@ -3,7 +3,7 @@
 - This project consists of two main components: the client (frontend) and the server (backend). 
 - The client is built using React and the server is built with Node.js, with MongoDB as the database to store user data and search history.
 
-# Deployment Link
+# Live Site (Deployment Link)
 https://66800f75ca7a2b4af59623b3--flourishing-begonia-4aadc1.netlify.app/
 
 # Demo
