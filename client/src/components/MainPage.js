@@ -34,7 +34,6 @@ const MainPage = ({ user }) => {
 
   const getWeather = async (lat, lon) => {
     try {
-      console.log('Fetching weather data for coordinates:', lat, lon);
       const geocodeResponse = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse`, {
         params: {
           lat: lat,
@@ -44,7 +43,6 @@ const MainPage = ({ user }) => {
         },
       })
       const cityNameInEnglish = geocodeResponse.data[0].name
-      console.log('Geocode response:', geocodeResponse.data);
       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
         params: {
           lat: lat,
@@ -52,7 +50,6 @@ const MainPage = ({ user }) => {
           appid: process.env.REACT_APP_OPENWEATHER_API_KEY
         },
       })
-      console.log('Weather response:', response.data);
       const weatherData = response.data
       const temperatureInCelsius = (weatherData.main.temp - 273.15).toFixed(1)
       const timezoneOffset = weatherData.timezone
@@ -76,7 +73,6 @@ const MainPage = ({ user }) => {
 
   const handleSearch = async (city) => {
     try {
-      console.log('Searching for city:', city);
       const geocodeResponse = await axios.get(`https://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: city,
