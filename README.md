@@ -4,7 +4,7 @@
 - The client is built using React and the server is built with Node.js, with MongoDB as the database to store user data and search history.
 
 # Live Site (Deployment Link)
-https://flourishing-begonia-4aadc1.netlify.app)](https://flourishing-begonia-4aadc1.netlify.app/
+[https://flourishing-begonia-4aadc1.netlify.app)]
 <img width="400" alt="Screenshot 2024-07-02 at 6 55 42 AM" src="https://github.com/seolheekang1221/TVO/assets/71479209/c114be5a-ddb8-44cc-bf58-6e38565abac2">
 
 
